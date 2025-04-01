@@ -13,16 +13,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "brands")
+@Table(name = "roles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Brand {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String brandName;
-    private String image; 
-    @OneToMany(mappedBy = "brand")
-    private List<Product> products;
+    private Long roleId;
+    private String roleName;
+    // @OneToMany(mappedBy = "role")
+    // private List<User> users;
 }
