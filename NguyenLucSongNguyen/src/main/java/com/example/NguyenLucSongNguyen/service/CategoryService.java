@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Category;
+import com.example.NguyenLucSongNguyen.dto.CategoryDTO;
 
 public interface CategoryService {
-    Category createCategory(Category category);
-    Category updateCategory(Long categoryId,Category category);
+    CategoryDTO createCategory(Category category);
+    CategoryDTO updateCategory(Long categoryId,Category category);
     String deleteCategoryById(Long categoryId);
     List<Category> getAllCategory();
-    Optional<Category> getCategoryById(Long categoryId);
+    CategoryDTO getCategoryById(Long categoryId);
 }

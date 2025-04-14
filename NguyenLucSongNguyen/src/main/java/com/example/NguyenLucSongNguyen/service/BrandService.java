@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Brand;
+import com.example.NguyenLucSongNguyen.dto.BrandDTO;
 
-public interface BrandRepo {
-    Brand createBrand(Brand brand);
-    Brand updateBrand(Long brandId,Brand brand);
+public interface BrandService {
+    BrandDTO createBrand(Brand brand);
+    BrandDTO updateBrand(Long brandId,Brand brand);
     String deleteBrandById(Long brandId);
     List<Brand> getAllBrand();
-    Optional<Brand> getBrandById(Long brandId);
+    BrandDTO getBrandById(Long brandId);
 }

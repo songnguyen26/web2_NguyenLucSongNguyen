@@ -13,5 +13,9 @@ public class NguyenLucSongNguyenApplication {
 		SpringApplication.run(NguyenLucSongNguyenApplication.class, args);
 		
 	}
+	@Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }
