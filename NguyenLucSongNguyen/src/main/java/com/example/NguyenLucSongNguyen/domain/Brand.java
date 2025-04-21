@@ -2,6 +2,7 @@ package com.example.NguyenLucSongNguyen.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,6 @@ public class Brand {
     private Long id;
     private String brandName;
     private String image; 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand",cascade = CascadeType.ALL)
     private List<Product> products;
 }

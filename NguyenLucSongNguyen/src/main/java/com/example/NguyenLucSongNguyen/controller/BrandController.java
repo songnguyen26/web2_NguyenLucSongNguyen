@@ -29,13 +29,13 @@ public class BrandController {
     @Autowired
     BrandService brandService;
     @PostMapping("/brand")
-    public ResponseEntity<BrandDTO> createBrand(@RequestBody Brand brand) {
+    public ResponseEntity<BrandDTO> createBrand(@RequestBody BrandDTO brand) {
         BrandDTO newBrand = brandService.createBrand(brand);
         
         return new ResponseEntity<BrandDTO>(newBrand,HttpStatus.OK);
     }
     @PutMapping("/brand/{id}")
-    public ResponseEntity<BrandDTO> upadteBrand(@PathVariable Long id, @RequestBody Brand brand) {
+    public ResponseEntity<BrandDTO> upadteBrand(@PathVariable Long id, @RequestBody BrandDTO brand) {
         //TODO: process PUT request
         BrandDTO updatedBrand = brandService.updateBrand(id, brand);
         return new ResponseEntity<BrandDTO>(updatedBrand,HttpStatus.OK);

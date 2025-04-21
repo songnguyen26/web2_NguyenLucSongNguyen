@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Product;
+import com.example.NguyenLucSongNguyen.dto.ProductDTO;
 
 public interface ProductService {
-     Product createProduct(Product product);
+     ProductDTO createProduct(ProductDTO productDTO);
      List<Product> getAllProducts();
-     Product updateProduct(Long productId, Product product);
+     ProductDTO updateProduct(Long productId, ProductDTO productDTO);
      String deleteProduct(Long productId);
      Optional<Product> getProductById(Long productId);
 }

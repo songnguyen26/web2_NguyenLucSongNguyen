@@ -18,30 +18,32 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public CategoryDTO createCategory(Category category) {
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+       
+       Category category = modelMapper.map(categoryDTO, Category.class);
        Category newCategory = categoryRepo.save(category);
        return modelMapper.map(newCategory,CategoryDTO.class);
     }
 
     @Override
-    public CategoryDTO updateCategory(Long categoryId, Category category) {
+    public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) {
         Category categoryfromDB = categoryRepo.findById(categoryId).get();
-        categoryfromDB.setCategoryName(category.getCategoryName());
-        categoryfromDB.setImage(category.getImage());
+        categoryfromDB.setCategoryName(categoryDTO.getCategoryname());
+        categoryfromDB.setImage(categoryDTO.getImage());
         categoryRepo.save(categoryfromDB);
         return modelMapper.map(categoryfromDB, CategoryDTO.class);
     }
 
     @Override
     public String deleteCategoryById(Long categoryId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteCategoryById'");
-    }
+        categoryRepo.deleteById(categoryId);
+        return "Category with Id" + categoryId + " deleted successfull";
+        }
 
     @Override
     public List<Category> getAllCategory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllCategory'");
+        List<Category> lstCategory = categoryRepo.findAll();
+        return lstCategory;
     }
 
     @Override

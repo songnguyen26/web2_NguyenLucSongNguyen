@@ -7,8 +7,8 @@ import com.example.NguyenLucSongNguyen.domain.Category;
 import com.example.NguyenLucSongNguyen.dto.CategoryDTO;
 
 public interface CategoryService {
-    CategoryDTO createCategory(Category category);
-    CategoryDTO updateCategory(Long categoryId,Category category);
+    CategoryDTO createCategory(CategoryDTO categoryDTO);
+    CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO);
     String deleteCategoryById(Long categoryId);
     List<Category> getAllCategory();
     CategoryDTO getCategoryById(Long categoryId);

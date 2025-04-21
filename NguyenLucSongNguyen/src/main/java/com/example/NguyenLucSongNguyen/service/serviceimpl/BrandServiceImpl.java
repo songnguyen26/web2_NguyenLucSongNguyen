@@ -19,16 +19,17 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public BrandDTO createBrand(Brand brand) {
+    public BrandDTO createBrand(BrandDTO brandDTO) {
+        Brand brand = modelMapper.map(brandDTO,Brand.class);
         Brand newBrand = brandRepo.save(brand);
        return modelMapper.map(newBrand,BrandDTO.class);
     }
 
     @Override
-    public BrandDTO updateBrand(Long brandId, Brand brand) {
+    public BrandDTO updateBrand(Long brandId, BrandDTO brandDTO) {
         Brand brandUpdate = brandRepo.findById(brandId).get();
-        brandUpdate.setBrandName(brand.getBrandName());
-        brandUpdate.setImage(brand.getImage());
+        brandUpdate.setBrandName(brandDTO.getBrandName());
+        brandUpdate.setImage(brandDTO.getImage());
         brandRepo.save(brandUpdate);
         return modelMapper.map(brandUpdate,BrandDTO.class);
     }

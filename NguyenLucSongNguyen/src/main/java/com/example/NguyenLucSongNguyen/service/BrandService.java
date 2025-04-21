@@ -7,8 +7,8 @@ import com.example.NguyenLucSongNguyen.domain.Brand;
 import com.example.NguyenLucSongNguyen.dto.BrandDTO;
 
 public interface BrandService {
-    BrandDTO createBrand(Brand brand);
-    BrandDTO updateBrand(Long brandId,Brand brand);
+    BrandDTO createBrand(BrandDTO brandDTO);
+    BrandDTO updateBrand(Long brandId,BrandDTO brandDTO);
     String deleteBrandById(Long brandId);
     List<Brand> getAllBrand();
     BrandDTO getBrandById(Long brandId);
