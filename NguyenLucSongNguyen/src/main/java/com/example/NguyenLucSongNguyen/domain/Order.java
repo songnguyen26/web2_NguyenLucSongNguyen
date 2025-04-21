@@ -1,5 +1,6 @@
 package com.example.NguyenLucSongNguyen.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -23,10 +24,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
+    private Date orderDate;
     private Double totalPrice;
-    // @ManyToOne
-    // @JoinColumn(name = "user_id")
-    // private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }

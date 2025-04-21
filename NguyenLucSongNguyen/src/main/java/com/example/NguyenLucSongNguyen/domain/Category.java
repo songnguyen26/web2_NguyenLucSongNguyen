@@ -1,6 +1,8 @@
 package com.example.NguyenLucSongNguyen.domain;
 
+import java.util.Date;
 import java.util.List;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -8,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -28,5 +32,18 @@ public class Category {
     
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Product> products;
+    
+    private Date createdDate;
+    private Date modifiedDate;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDate = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        modifiedDate = new Date();
+    }
 
 }

@@ -2,6 +2,7 @@ package com.example.NguyenLucSongNguyen.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
     private String roleName;
-    // @OneToMany(mappedBy = "role")
-    // private List<User> users;
+     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
+     private List<User> users;
 }

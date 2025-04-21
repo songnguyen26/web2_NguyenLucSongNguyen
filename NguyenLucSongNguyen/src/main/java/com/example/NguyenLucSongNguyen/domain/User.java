@@ -29,9 +29,9 @@ public class User {
     private String email;
     private String address;
     private String password;
-    // @ManyToOne
-    // @JoinColumn(name = "role_id")
-    // private Role role;
-    // @OneToMany(mappedBy = "user")
-    // private List<Order> orders;
+     @ManyToOne
+     @JoinColumn(name = "role_id")
+     private Role role;
+     @OneToMany(mappedBy = "user")
+     private List<Order> orders;
 }
