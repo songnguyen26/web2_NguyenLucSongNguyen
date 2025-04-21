@@ -1,6 +1,8 @@
 package com.example.NguyenLucSongNguyen.service;
 
-import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Brand;
@@ -10,6 +12,6 @@ public interface BrandService {
     BrandDTO createBrand(BrandDTO brandDTO);
     BrandDTO updateBrand(Long brandId,BrandDTO brandDTO);
     String deleteBrandById(Long brandId);
-    List<Brand> getAllBrand();
+    Page<Brand> getAllBrand(Pageable pageable);
     BrandDTO getBrandById(Long brandId);
 }

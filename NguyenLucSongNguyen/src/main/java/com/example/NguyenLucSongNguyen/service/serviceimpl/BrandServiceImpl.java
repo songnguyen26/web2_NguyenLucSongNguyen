@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import com.example.NguyenLucSongNguyen.domain.Brand;
 import com.example.NguyenLucSongNguyen.dto.BrandDTO;
@@ -41,8 +44,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<Brand> getAllBrand() {
-        return brandRepo.findAll();
+    public Page<Brand> getAllBrand(Pageable pageable) {
+        return brandRepo.findAll(pageable);
     }
 
     @Override

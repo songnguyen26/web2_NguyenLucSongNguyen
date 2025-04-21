@@ -1,5 +1,7 @@
 package com.example.NguyenLucSongNguyen.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,9 +41,9 @@ public class CategoryController {
         return new ResponseEntity<CategoryDTO>(updatedCategory,HttpStatus.OK);
     }
     @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getAllCategory(){
-        List<Category> lstCategory = categoryService.getAllCategory();
-        return new ResponseEntity<List<Category>>( lstCategory,HttpStatus.OK );
+    public ResponseEntity<Page<Category>> getAllCategory(Pageable pageable){
+        Page<Category> categoryPage = categoryService.getAllCategory(pageable);
+        return new ResponseEntity<>(categoryPage,HttpStatus.OK);
     }
     @GetMapping("/category/{id}")
     public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {

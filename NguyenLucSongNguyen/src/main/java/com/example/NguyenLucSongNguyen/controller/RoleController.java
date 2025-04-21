@@ -3,13 +3,14 @@ package com.example.NguyenLucSongNguyen.controller;
 import com.example.NguyenLucSongNguyen.domain.Role;
 import com.example.NguyenLucSongNguyen.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-
+import org.springframework.data.web.PageableDefault;
 @RestController
 @RequestMapping("/api/roles")
 public class RoleController {
@@ -30,10 +31,10 @@ public class RoleController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Role>> getAllRoles() {
-        List<Role> roles = roleService.getAllRoles();
-        return new ResponseEntity<>(roles, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<Page<Role>> getAllRoles(@PageableDefault(size = 5) Pageable pageable) {
+        Page<Role> roles = roleService.getAllRoles(pageable);
+        return new ResponseEntity<>(roles,HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

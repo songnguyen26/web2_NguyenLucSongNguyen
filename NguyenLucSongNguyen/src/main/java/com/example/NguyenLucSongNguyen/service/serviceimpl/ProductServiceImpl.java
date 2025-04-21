@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.NguyenLucSongNguyen.domain.Brand;
@@ -39,10 +41,8 @@ public class ProductServiceImpl implements ProductService  {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllProducts'");
-    }
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepo.findAll(pageable);}
 
     @Override
     public ProductDTO updateProduct(Long productId, ProductDTO productDTO) {

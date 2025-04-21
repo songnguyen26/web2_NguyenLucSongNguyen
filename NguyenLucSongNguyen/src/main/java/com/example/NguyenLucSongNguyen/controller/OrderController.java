@@ -3,13 +3,14 @@ package com.example.NguyenLucSongNguyen.controller;
 import com.example.NguyenLucSongNguyen.domain.Order;
 import com.example.NguyenLucSongNguyen.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-
+import org.springframework.data.web.PageableDefault;
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -29,10 +30,10 @@ public class OrderController {
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<Page<Order>> getAllOrders(@PageableDefault(size = 10) Pageable pageable) {
+        Page<Order> orders = orderService.getAllOrders(pageable);
+        return new ResponseEntity<Page<Order>>(orders, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

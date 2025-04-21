@@ -1,6 +1,8 @@
 package com.example.NguyenLucSongNguyen.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Category;
@@ -10,6 +12,6 @@ public interface CategoryService {
     CategoryDTO createCategory(CategoryDTO categoryDTO);
     CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO);
     String deleteCategoryById(Long categoryId);
-    List<Category> getAllCategory();
+    Page<Category> getAllCategory(Pageable pageable);
     CategoryDTO getCategoryById(Long categoryId);
 }

@@ -4,6 +4,8 @@ import com.example.NguyenLucSongNguyen.domain.Order;
 import com.example.NguyenLucSongNguyen.repository.OrderRepo;
 import com.example.NguyenLucSongNguyen.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepo.findAll();
+    public Page<Order> getAllOrders(Pageable pageable) {
+        return orderRepo.findAll(pageable);
     }
 
     @Override

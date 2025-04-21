@@ -3,9 +3,12 @@ package com.example.NguyenLucSongNguyen.service.serviceimpl;
 import com.example.NguyenLucSongNguyen.domain.OrderDetail;
 import com.example.NguyenLucSongNguyen.repository.OrderDetailRepo;
 import com.example.NguyenLucSongNguyen.service.OrderDetailService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +29,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public List<OrderDetail> getAllOrderDetails() {
-        return orderDetailRepo.findAll();
+    public Page<OrderDetail> getAllOrderDetails(Pageable pageable) {
+        return orderDetailRepo.findAll(pageable);
     }
 
     @Override

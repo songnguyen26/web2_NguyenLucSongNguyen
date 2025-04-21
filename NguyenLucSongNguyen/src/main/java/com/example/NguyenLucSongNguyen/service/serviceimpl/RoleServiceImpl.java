@@ -4,6 +4,9 @@ import com.example.NguyenLucSongNguyen.domain.Role;
 import com.example.NguyenLucSongNguyen.repository.RoleRepo;
 import com.example.NguyenLucSongNguyen.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +30,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleRepo.findAll();
+    public Page<Role> getAllRoles(Pageable pageable) {
+        return roleRepo.findAll(pageable);
     }
 
     @Override

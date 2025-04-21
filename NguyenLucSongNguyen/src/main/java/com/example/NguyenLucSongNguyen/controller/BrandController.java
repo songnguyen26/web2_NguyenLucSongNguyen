@@ -1,5 +1,7 @@
 package com.example.NguyenLucSongNguyen.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,7 +9,6 @@ import com.example.NguyenLucSongNguyen.domain.Brand;
 import com.example.NguyenLucSongNguyen.dto.BrandDTO;
 import com.example.NguyenLucSongNguyen.service.BrandService;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,9 @@ public class BrandController {
         return new ResponseEntity<BrandDTO>(brand,HttpStatus.OK);
     }
     @GetMapping("/brands")
-    public ResponseEntity<List<Brand>> getAllBrand() {
-        List<Brand> lstbrand = brandService.getAllBrand();
-        return new ResponseEntity<List<Brand>>(lstbrand,HttpStatus.OK);
+    public ResponseEntity<Page<Brand>> getAllBrand(Pageable pageable) {
+        Page<Brand> brandPage = brandService.getAllBrand(pageable);
+        return new ResponseEntity<>(brandPage, HttpStatus.OK);
     }
     @DeleteMapping("/brand/{id}")
     public ResponseEntity<String> delteBrandById(@PathVariable Long id){

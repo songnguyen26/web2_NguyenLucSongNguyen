@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.example.NguyenLucSongNguyen.domain.User;
 import com.example.NguyenLucSongNguyen.dto.request.UserRequest;
@@ -42,8 +44,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getALlUsers() {
-        return userRepo.findAll();
+    public Page<User> getALlUsers(Pageable pageable) {
+        return userRepo.findAll(pageable);
     }
 
     @Override
