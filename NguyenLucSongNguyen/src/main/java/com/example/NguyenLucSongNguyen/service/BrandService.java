@@ -7,11 +7,12 @@ import java.util.Optional;
 
 import com.example.NguyenLucSongNguyen.domain.Brand;
 import com.example.NguyenLucSongNguyen.dto.BrandDTO;
+import com.example.NguyenLucSongNguyen.dto.response.BrandResponse;
 
 public interface BrandService {
     BrandDTO createBrand(BrandDTO brandDTO);
     BrandDTO updateBrand(Long brandId,BrandDTO brandDTO);
     String deleteBrandById(Long brandId);
-    Page<Brand> getAllBrand(Pageable pageable);
+    BrandResponse getAllBrand(Integer pageNumber,Integer pageSize, String sortBy,String sortOrder);
     BrandDTO getBrandById(Long brandId);
 }

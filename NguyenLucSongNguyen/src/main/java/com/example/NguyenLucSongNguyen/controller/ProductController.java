@@ -7,11 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.example.NguyenLucSongNguyen.domain.Product;
 import com.example.NguyenLucSongNguyen.dto.ProductDTO;
+import com.example.NguyenLucSongNguyen.dto.response.CategoryResponse;
+import com.example.NguyenLucSongNguyen.dto.response.ProductResponse;
 import com.example.NguyenLucSongNguyen.service.ProductService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,16 +36,20 @@ public class ProductController {
         return new ResponseEntity<>(newProduct,HttpStatus.OK);
     }
     @PutMapping("/product/{id}")
-    public ResponseEntity<ProductDTO> updateProduc(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
         
         ProductDTO updateProduct = productService.updateProduct(id, productDTO);
         
         return new ResponseEntity<>(updateProduct,HttpStatus.OK);
     }
     @GetMapping("/products")
-    public ResponseEntity<Page<Product>> getAllProduct(Pageable pageable) {
-        Page<Product> productPage = productService.getAllProduct(pageable);
-        return new ResponseEntity<>(productPage,HttpStatus.OK);
+    public ResponseEntity<ProductResponse> getAllProducts(
+            @RequestParam(name = "pageSize", defaultValue = "10",required = false) Integer pageSize,
+            @RequestParam(name = "pageNumber", defaultValue = "0",required = false) Integer pageNumber,
+            @RequestParam(name = "sortBy",defaultValue = "productId",required = false) String sortBy,
+            @RequestParam(name = "sortOrder",defaultValue = "asc",required = false) String sortOrder){
+                ProductResponse productResponse = productService.getAllProducts(pageSize, pageNumber, sortBy, sortOrder);
+        return new ResponseEntity<ProductResponse>(productResponse,HttpStatus.OK);
     }
 
     @GetMapping("/product/{id}")

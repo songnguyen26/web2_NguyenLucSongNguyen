@@ -5,12 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.example.NguyenLucSongNguyen.domain.User;
+import com.example.NguyenLucSongNguyen.dto.UserDTO;
 import com.example.NguyenLucSongNguyen.dto.request.UserRequest;
+import com.example.NguyenLucSongNguyen.dto.response.UserResponse;
 
 public interface UserService {
-    User createUser(User user);
-    User updateUser(User user,Long userId);
+    UserDTO createUser(UserDTO userDTO);
+    UserDTO updateUser(UserDTO userDTO,Long userId);
     String deleteUserById(Long userId);
-    Page<User> getALlUsers(Pageable pageable);
-    User getUserById(Long userId);
+    UserResponse getALlUsers(Integer pageSize,Integer pageNumber, String sortBy, String sortOrder);
+    UserDTO getUserById(Long userId);
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.NguyenLucSongNguyen.domain.Role;
 
 @Repository
-public interface RoleRepo extends JpaRepository<Role,Long> {
+public interface RoleRepo extends JpaRepository<Role,Integer> {
     
 }

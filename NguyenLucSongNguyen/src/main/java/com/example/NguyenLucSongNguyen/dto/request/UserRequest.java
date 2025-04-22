@@ -1,7 +1,6 @@
 package com.example.NguyenLucSongNguyen.dto.request;
 
 public class UserRequest {
-    private Long userId;
     private String firstName;
     private String lastName;
     private String phoneNumber;

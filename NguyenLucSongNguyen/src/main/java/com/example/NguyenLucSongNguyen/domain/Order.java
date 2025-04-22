@@ -26,9 +26,7 @@ public class Order {
     private Long orderId;
     private Date orderDate;
     private Double totalPrice;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String email;
     
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;

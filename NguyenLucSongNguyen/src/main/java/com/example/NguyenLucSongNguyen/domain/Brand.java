@@ -29,16 +29,5 @@ public class Brand {
     private String image; 
     @OneToMany(mappedBy = "brand",cascade = CascadeType.ALL)
     private List<Product> products;
-    private Date createdDate;
-    private Date modifiedDate;
 
-    @PrePersist
-    protected void onCreate() {
-        createdDate = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        modifiedDate = new Date();
-    }
 }

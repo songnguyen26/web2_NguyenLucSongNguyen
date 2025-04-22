@@ -1,15 +1,19 @@
 package com.example.NguyenLucSongNguyen.service.serviceimpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.NguyenLucSongNguyen.domain.Category;
 import com.example.NguyenLucSongNguyen.dto.CategoryDTO;
+import com.example.NguyenLucSongNguyen.dto.response.CategoryResponse;
 import com.example.NguyenLucSongNguyen.repository.CategoryRepo;
 import com.example.NguyenLucSongNguyen.service.CategoryService;
 
@@ -43,9 +47,24 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
     @Override
-    public Page<Category> getAllCategory(Pageable pageable) {
-        Page<Category> pageCategory = categoryRepo.findAll(pageable);
-        return pageCategory;
+    public CategoryResponse getAllCategory(Integer pageSize, Integer pageNumber,String sortBy,String sortOrder) {
+        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+        Page<Category> pageCategories = categoryRepo.findAll(pageDetails);
+        List<Category> categories = pageCategories.getContent();
+        if(categories.size()==0){
+            throw new RuntimeException("No category created till now");
+        }
+        List<CategoryDTO> categoryDTOs = categories.stream().map(category -> modelMapper.map(category, CategoryDTO.class)).collect(Collectors.toList());
+        CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setContent(categoryDTOs);
+        categoryResponse.setPageNumber(pageCategories.getNumber());
+        categoryResponse.setPageSize(pageCategories.getSize());
+        categoryResponse.setTotalElements(pageCategories.getTotalElements());
+        categoryResponse.setTotalPages(pageCategories.getTotalPages());
+        categoryResponse.setLastPage(pageCategories.isLast());
+        return categoryResponse;
+
     }
 
     @Override

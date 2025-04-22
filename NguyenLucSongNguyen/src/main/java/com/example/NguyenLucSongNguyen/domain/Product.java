@@ -1,10 +1,13 @@
 package com.example.NguyenLucSongNguyen.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.NguyenLucSongNguyen.dto.BrandDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,7 +43,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-    @OneToMany(mappedBy = "product")
-    private List<OrderDetail> orderDetails;
-    
+    @OneToMany(mappedBy = "product",  cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private List<OrderDetail> orderDetails  = new ArrayList<>();
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<CartItem> cartItems = new ArrayList<>();
 }
