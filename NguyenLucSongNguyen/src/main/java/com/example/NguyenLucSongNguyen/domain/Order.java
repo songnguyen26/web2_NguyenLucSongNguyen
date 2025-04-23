@@ -1,5 +1,6 @@
 package com.example.NguyenLucSongNguyen.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,10 +25,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private Date orderDate;
+    private LocalDate orderDate;
     private Double totalPrice;
     private String email;
-    
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }
