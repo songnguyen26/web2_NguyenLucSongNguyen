@@ -29,20 +29,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class ProductController {
     @Autowired
     ProductService productService;
-    @PostMapping("/product")
+    @PostMapping("/admin/product")
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
         ProductDTO newProduct = productService.createProduct(productDTO);
         
         return new ResponseEntity<>(newProduct,HttpStatus.OK);
     }
-    @PutMapping("/product/{id}")
+    @PutMapping("/admin/product/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
         
         ProductDTO updateProduct = productService.updateProduct(id, productDTO);
         
         return new ResponseEntity<>(updateProduct,HttpStatus.OK);
     }
-    @GetMapping("/products")
+    @GetMapping("/public/products")
     public ResponseEntity<ProductResponse> getAllProducts(
             @RequestParam(name = "pageSize", defaultValue = "10",required = false) Integer pageSize,
             @RequestParam(name = "pageNumber", defaultValue = "0",required = false) Integer pageNumber,
@@ -52,13 +52,13 @@ public class ProductController {
         return new ResponseEntity<ProductResponse>(productResponse,HttpStatus.OK);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/public/product/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         ProductDTO product = productService.getProductById(id);
         return new ResponseEntity<>(product,HttpStatus.OK);
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/admin/product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         String notifi = productService.deleteProductById(id);
         return new ResponseEntity<>(notifi,HttpStatus.OK);

@@ -20,7 +20,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/order/email/{email}/cartId{cartId}")
+    @PostMapping("/public/order/email/{email}/cartId{cartId}")
     public ResponseEntity<OrderDTO> createOrder(@PathVariable(name = "email") String email, @PathVariable(name = "cartId") Long cartId) {
         OrderDTO order = orderService.createOrder(email, cartId);
         return new ResponseEntity<OrderDTO>(order, HttpStatus.OK);

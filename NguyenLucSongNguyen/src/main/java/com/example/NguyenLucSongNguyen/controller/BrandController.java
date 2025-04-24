@@ -30,24 +30,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BrandController {
     @Autowired
     BrandService brandService;
-    @PostMapping("/brand")
+    @PostMapping("/admin/brand")
     public ResponseEntity<BrandDTO> createBrand(@RequestBody BrandDTO brand) {
         BrandDTO newBrand = brandService.createBrand(brand);
         
         return new ResponseEntity<BrandDTO>(newBrand,HttpStatus.OK);
     }
-    @PutMapping("/brand/{id}")
+    @PutMapping("/admin/brand/{id}")
     public ResponseEntity<BrandDTO> upadteBrand(@PathVariable Long id, @RequestBody BrandDTO brand) {
         //TODO: process PUT request
         BrandDTO updatedBrand = brandService.updateBrand(id, brand);
         return new ResponseEntity<BrandDTO>(updatedBrand,HttpStatus.OK);
     }
-    @GetMapping("/brand/{id}")
+    @GetMapping("/public/brand/{id}")
     public ResponseEntity<BrandDTO> getBrandById(@PathVariable Long id) {
         BrandDTO brand = brandService.getBrandById(id);
         return new ResponseEntity<BrandDTO>(brand,HttpStatus.OK);
     }
-    @GetMapping("/brands")
+    @GetMapping("/public/brands")
     public ResponseEntity<BrandResponse> getAllBrand(@RequestParam(name = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
     @RequestParam(name = "pageSize", defaultValue = "10",required = false) Integer pageSize,
     @RequestParam(name = "sortBy",defaultValue = "id",required = false) String sortBy,
@@ -55,7 +55,7 @@ public class BrandController {
         BrandResponse brandResponse = brandService.getAllBrand(pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<BrandResponse>(brandResponse, HttpStatus.OK);
     }
-    @DeleteMapping("/brand/{id}")
+    @DeleteMapping("/admin/brand/{id}")
     public ResponseEntity<String> delteBrandById(@PathVariable Long id){
         String deleteNoti = brandService.deleteBrandById(id);
         return new ResponseEntity<String>(deleteNoti,HttpStatus.OK);

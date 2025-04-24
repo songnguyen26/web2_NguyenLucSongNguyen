@@ -23,18 +23,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CartController {
     @Autowired
     CartService cartService;
-    @PostMapping("/cartId/{cartId}/product/{productId}/quantity/{quantity}")
+    @PostMapping("/public/cartId/{cartId}/product/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO> addProductToCart (@PathVariable(name = "cartId") Long cartId,@PathVariable(name = "productId") Long productId,@PathVariable(name = "quantity") Integer quantity) {
         CartDTO cartDTO = cartService.addProductToCart(productId, cartId, quantity);
         
         return new ResponseEntity<CartDTO>(cartDTO,HttpStatus.OK);
     }
-    @GetMapping("/cart/{id}")
+    @GetMapping("/public/cart/{id}")
     public ResponseEntity<CartDTO> getCartById(@PathVariable(name = "id") Long id) {
         CartDTO cartDTO = cartService.getCartById(id);
         return new ResponseEntity<CartDTO>(cartDTO,HttpStatus.OK);
     }
-    @DeleteMapping("/cart/{cartId}/product/{id}")
+    @DeleteMapping("/public/cart/{cartId}/product/{id}")
     public ResponseEntity<String> deleteCartItem(@PathVariable(name = "cartId") Long cartId,@PathVariable(name = "id") Long productId){
         String notify = cartService.deleteCartItemByCartIdAndProductId(cartId, productId);
         return new ResponseEntity<String>(notify,HttpStatus.OK);

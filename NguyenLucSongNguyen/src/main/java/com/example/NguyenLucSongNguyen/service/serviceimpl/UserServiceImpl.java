@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.NguyenLucSongNguyen.domain.Cart;
 import com.example.NguyenLucSongNguyen.domain.Role;
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService {
     UserRepo userRepo;
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         
@@ -39,6 +42,7 @@ public class UserServiceImpl implements UserService {
             cart.setUser(user);
             user.setCart(cart);
             user.setRole(role);
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             User savedUser = userRepo.save(user);
             return modelMapper.map(savedUser,UserDTO.class);
         }catch(DataIntegrityViolationException e){

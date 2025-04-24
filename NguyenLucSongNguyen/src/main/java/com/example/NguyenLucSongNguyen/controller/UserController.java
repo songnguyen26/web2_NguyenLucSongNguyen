@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     @Autowired
     UserService userService;
-    @PostMapping("/user")
+    @PostMapping("/register")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         UserDTO newUser = userService.createUser(user);
         
@@ -50,12 +50,12 @@ public class UserController {
         userService.updateUser(user, id);
         return new ResponseEntity<UserDTO>(user,HttpStatus.OK);
     }
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/admin/user/{id}")
     public String deleteUser(@PathVariable Long id){
         String deleted = userService.deleteUserById(id);
         return deleted;
     }
-    @GetMapping("/users")
+    @GetMapping("/admin/users")
     public ResponseEntity<UserResponse> getAllUsers(
          @RequestParam(name = "pageSize", defaultValue = "10",required = false) Integer pageSize,
             @RequestParam(name = "pageNumber", defaultValue = "0",required = false) Integer pageNumber,
@@ -64,7 +64,7 @@ public class UserController {
                 UserResponse userResponse = userService.getALlUsers(pageSize, pageNumber, sortBy, sortOrder);
         return new ResponseEntity<UserResponse>(userResponse,HttpStatus.OK);
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/public/user/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         return new ResponseEntity<UserDTO>(user,HttpStatus.OK);
